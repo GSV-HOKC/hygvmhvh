@@ -1,0 +1,542 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>💜 Владка | Подарок от Нокса 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        body {
+            min-height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            color: #5a3e4b;
+            animation: rainbowBg 12s infinite alternate;
+        }
+        @keyframes rainbowBg {
+            0% { background: linear-gradient(145deg, #ffcccc, #ff9999); }
+            17% { background: linear-gradient(145deg, #ffdd99, #ffcc66); }
+            33% { background: linear-gradient(145deg, #ffffcc, #ffff99); }
+            50% { background: linear-gradient(145deg, #ccffcc, #99ff99); }
+            67% { background: linear-gradient(145deg, #99ccff, #6699ff); }
+            83% { background: linear-gradient(145deg, #cc99ff, #9966ff); }
+            100% { background: linear-gradient(145deg, #ff99cc, #ff66aa); }
+        }
+        .content {
+            position: relative;
+            z-index: 5;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 1.5rem 1.2rem 3rem;
+        }
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 20, 40, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .login-card {
+            background: #fff0f5;
+            border-radius: 60px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 320px;
+            width: 85%;
+            border: 2px solid #ffb7ca;
+        }
+        .login-card input {
+            width: 100%;
+            padding: 12px;
+            margin: 1rem 0;
+            border-radius: 50px;
+            border: 1px solid #ff99bb;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .login-card button {
+            background: #ff88aa;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+        .main-site { display: none; }
+        .hero-block {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 48px;
+            padding: 2rem 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border: 3px solid white;
+            position: relative;
+        }
+        .hero-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,240,245,0.4);
+            border-radius: 48px;
+        }
+        .hero-block h1, .hero-block p { position: relative; z-index: 2; }
+        .hero-block h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            background: linear-gradient(135deg, #d46b8c, #ff9eb5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            cursor: pointer;
+        }
+        .btn-custom {
+            background: rgba(255, 230, 240, 0.85);
+            backdrop-filter: blur(5px);
+            border: 1px solid #ffbfd0;
+            border-radius: 60px;
+            padding: 12px;
+            width: 100%;
+            margin-top: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #b24b6e;
+            transition: 0.05s linear;
+        }
+        .btn-custom:active { transform: scale(0.96); animation: btnShake 0.2s ease; }
+        @keyframes btnShake { 0%,100%{ transform: translateX(0); } 25%{ transform: translateX(-3px); } 75%{ transform: translateX(3px); } }
+        .effect-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+        .effect-particle { position: absolute; font-size: 1.6rem; pointer-events: none; animation: particleFly 1.5s ease-out forwards; }
+        @keyframes particleFly { 0% { transform: scale(0.3) translate(0, 0); opacity: 1; } 100% { transform: scale(1.3) translate(var(--tx, 0), var(--ty, -100px)); opacity: 0; } }
+        .light-particle { position: absolute; width: 12px; height: 12px; background: radial-gradient(circle, #ffdd88, #ffaa33); border-radius: 50%; pointer-events: none; animation: lightFade 1s ease-out forwards; box-shadow: 0 0 8px #ffcc66; }
+        @keyframes lightFade { 0% { transform: scale(0.5); opacity: 0.9; } 100% { transform: scale(1.5); opacity: 0; } }
+        .star-particle { position: absolute; font-size: 1.4rem; pointer-events: none; animation: starFallAnim 2s linear forwards; }
+        @keyframes starFallAnim { 0% { transform: translateY(-50px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        .custom-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 2000; }
+        .custom-modal-card { background: #fff0f5; border-radius: 48px; padding: 1.8rem; text-align: center; max-width: 340px; width: 85%; border: 2px solid #ffb7ca; animation: popRotate 0.4s ease; }
+        @keyframes popRotate { from { transform: scale(0.3) rotate(-180deg); opacity: 0; } to { transform: scale(1) rotate(0deg); opacity: 1; } }
+        .custom-modal-card img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 0.5rem auto; border: 3px solid #ff88aa; }
+        .modal-close-btn { background: #ffb7cc; border: none; padding: 8px 20px; border-radius: 50px; margin-top: 0.8rem; cursor: pointer; }
+        .gallery-slider { display: flex; overflow-x: auto; gap: 1rem; padding: 0.5rem; scroll-snap-type: x mandatory; }
+        .gallery-slider img { width: 85%; flex: 0 0 85%; scroll-snap-align: center; border-radius: 32px; aspect-ratio: 3/4; object-fit: cover; border: 3px solid white; }
+        .slider-container { background: rgba(255,230,240,0.8); border-radius: 60px; padding: 1rem; margin: 1rem 0; text-align: center; }
+        input[type=range] { width: 100%; margin: 0.5rem 0; }
+        .facts-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 1rem 0; }
+        .fact-btn { background: #ffb7cc; border: none; padding: 8px 12px; border-radius: 50px; flex: 1; min-width: 70px; cursor: pointer; }
+        .fact-btn:active { transform: scale(0.94); }
+        .hidden-trigger { text-align: center; margin: 1rem 0; font-size: 0.7rem; opacity: 0.3; cursor: pointer; }
+        .finish-btn { background: #ff88aa; color: white; margin-top: 2rem; }
+        .telegram-link { display: inline-block; background: #ff88aa; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; margin-top: 1rem; }
+        .music-player { background: rgba(255,230,240,0.9); border-radius: 60px; padding: 0.8rem 1rem; margin: 1rem 0; text-align: center; }
+        .music-player button { background: #ffb7cc; border: none; padding: 6px 15px; border-radius: 50px; margin: 3px; cursor: pointer; }
+        .music-controls { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
+        footer { text-align: center; margin-top: 2rem; font-size: 0.7rem; opacity: 0.7; }
+        video { width: 100%; border-radius: 30px; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen">
+    <div class="login-card">
+        <i class="fas fa-lock" style="font-size: 3rem; color:#ff88aa;"></i>
+        <h2 style="font-family:Dancing Script;">✨ секретный вход ✨</h2>
+        <p>для доступа введи пароль</p>
+        <input type="text" id="loginInput" placeholder="пароль...">
+        <button id="loginBtn">🌹 войти</button>
+    </div>
+</div>
+
+<div class="main-site" id="mainSite">
+    <div class="content">
+        <div class="hero-block">
+            <h1 id="magicName">Владка</h1>
+            <p><i class="fas fa-star-of-life"></i> подарок от Нокса <i class="fas fa-star-of-life"></i></p>
+        </div>
+
+        <div class="music-player">
+            <i class="fas fa-music"></i> <strong>🎵 выбери мелодию</strong> <i class="fas fa-headphones"></i>
+            <div id="songButtons"></div>
+            <div class="music-controls">
+                <button id="stopMusicBtn">⏹️ выключить</button>
+            </div>
+        </div>
+
+        <button class="btn-custom" id="guideBtn">📖 руководство по сайту</button>
+        <button class="btn-custom" id="gameBtn">💖 игра: поймай 10 сердечек</button>
+
+        <div class="slider-container">
+            <i class="fas fa-smile"></i> насколько ты счастлива?
+            <input type="range" min="0" max="100" value="50" id="happinessSlider">
+            <div id="happinessValue">50% счастья</div>
+        </div>
+
+        <div class="gallery-slider">
+            <img src="foto1.jpg" onerror="this.src='https://placehold.co/400x500/ffccdd/ff6699?text=фото+1'">
+            <img src="foto2.jpg" onerror="this.src='https://placehold.co/400x500/ffccdd/ff6699?text=фото+2'">
+            <img src="foto3.jpg" onerror="this.src='https://placehold.co/400x500/ffccdd/ff6699?text=фото+3'">
+        </div>
+
+        <div class="facts-buttons">
+            <button class="fact-btn" data-fact="голос">🎤 голос</button>
+            <button class="fact-btn" data-fact="кудри">🌀 кудри</button>
+            <button class="fact-btn" data-fact="улыбка">😊 улыбка</button>
+            <button class="fact-btn" data-fact="глаза">👁️ глаза</button>
+            <button class="fact-btn" data-fact="характер">⭐ характер</button>
+        </div>
+
+        <button class="btn-custom" id="complimentBtn">✨ комплимент</button>
+        <button class="btn-custom" id="superpowerBtn">🦸‍♀️ суперсила</button>
+        <button class="btn-custom" id="horoscopeBtn">🔮 гороскоп</button>
+        <button class="btn-custom" id="portalBtn">🌀 портал любви</button>
+        <button class="btn-custom" id="casinoBtn">🎰 казино (секретное слово)</button>
+        <button class="btn-custom" id="memeBtn">🎭 мем дня</button>
+        <button class="btn-custom" id="starfallBtn">⭐ звездопад</button>
+
+        <div class="hidden-trigger" id="hiddenTrigger">
+            <i class="fas fa-heart"></i> 💜 <i class="fas fa-heart"></i>
+        </div>
+
+        <button class="btn-custom finish-btn" id="finishBtn">🏁 завершить просмотр</button>
+
+        <footer>✨ сделано с душой для тебя ✨</footer>
+    </div>
+</div>
+
+<div class="effect-layer" id="effectLayer"></div>
+
+<script>
+    // ========== НАСТРОЙКИ ==========
+    const telegramNick = 'GSV_HOKC';
+    const secretWord = 'НОКС';   // ЭТО НЕ ПАРОЛЬ! ЭТО СЕКРЕТНОЕ СЛОВО ДЛЯ КАЗИНО
+    
+    const songs = [
+        { name: '💜 Нежная мелодия', url: 'song1.mp3' },
+        { name: '✨ Романтичный вальс', url: 'song2.mp3' },
+        { name: '🌸 Лавандовый дождь', url: 'song3.mp3' },
+        { name: '⭐ Звёздная ночь', url: 'song4.mp3' },
+        { name: '💫 Космическое сияние', url: 'song5.mp3' }
+    ];
+    
+    const categoryImages = {
+        голос: { img: 'golos.jpg', text: 'Твой голос — нежная мелодия 💜' },
+        кудри: { img: 'kudri.jpg', text: 'Твои кудри — произведение искусства ✨' },
+        улыбка: { img: 'ulibka.jpg', text: 'Твоя улыбка растопит сердце 🌸' },
+        глаза: { img: 'glaza.jpg', text: 'Твои глаза — океан нежности 🌊' },
+        характер: { img: 'harakter.jpg', text: 'Ты сильная и нежная одновременно ⭐' }
+    };
+    
+    const gameWinImage = 'win.jpg';
+    const gameWinText = 'Ты молодец! Горжусь тобой 💜';
+    const complimentImage = 'compliment.jpg';
+    const superpowerImage = 'superpower.jpg';
+    const horoscopeImage = 'horoscope.jpg';
+    const portalImage = 'portal.jpg';
+    const memeImage = 'meme.jpg';
+    const casinoWinImage = 'casino_win.jpg';
+    const finishVideo = 'finish_video.mp4';
+    
+    const welcomeWithImage = {
+        img: 'welcome.jpg',
+        title: '💜 ПРИВЕТ, ВЛАДКА 💜',
+        text: 'Владка, этот сайт я сделал для тебя. Кайфуй, изучай, твой покорный фанат — Нокс 💜'
+    };
+    
+    const welcomeMessages = [
+        { title: '🌸 НЕМНОГО ОТ СЕБЯ 🌸', text: 'Я сделал тебе подарок. Обещаю в следующий раз подарить цветы, если напишешь, какие любишь.' },
+        { title: '🔮 СЕКРЕТНАЯ ПАСХАЛКА 🔮', text: 'Найди пасхалку (сердечки внизу) и задай мне вопросы 💫' }
+    ];
+    
+    const memes = ['🐱 Котик: ты супер!', '😂 Мем: вау, красотка!', '🦄 Единорог: Владка легенда'];
+    const hiddenFacts = [
+        '🔮 Ты уникальная ✨', '💜 Общение с тобой вытащило меня из загонов 🙏',
+        '⭐ Это не последний подарок', '🌀 Я всё ещё жду фотку твоих кудряшек... 📸'
+    ];
+    
+    const effectLayer = document.getElementById('effectLayer');
+    let currentAudio = null;
+    
+    function playSong(url) {
+        if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+        const audio = new Audio(url);
+        audio.loop = true;
+        audio.volume = 0.5;
+        audio.play().catch(e => console.log('Автовоспроизведение заблокировано'));
+        currentAudio = audio;
+    }
+    
+    function stopMusic() { if (currentAudio) { currentAudio.pause(); currentAudio = null; } }
+    
+    function megaExplode(count = 70) {
+        const items = ['🌸','🌼','🌷','🌺','🎉','🎊','⭐','✨','💫','🪷','🌻','🌸'];
+        for (let i = 0; i < count; i++) {
+            const el = document.createElement('div');
+            el.className = 'effect-particle';
+            el.innerHTML = items[Math.floor(Math.random() * items.length)];
+            el.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+            el.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+            el.style.fontSize = (18 + Math.random() * 28) + 'px';
+            const tx = (Math.random() - 0.5) * 200;
+            const ty = -Math.random() * 150 - 50;
+            el.style.setProperty('--tx', tx + 'px');
+            el.style.setProperty('--ty', ty + 'px');
+            effectLayer.appendChild(el);
+            setTimeout(() => el.remove(), 1500);
+        }
+        if (navigator.vibrate) navigator.vibrate(50);
+    }
+    
+    function lightSparks(count = 40) {
+        for (let i = 0; i < count; i++) {
+            const light = document.createElement('div');
+            light.className = 'light-particle';
+            light.style.left = Math.random() * (window.innerWidth - 40) + 'px';
+            light.style.top = Math.random() * (window.innerHeight - 80) + 'px';
+            effectLayer.appendChild(light);
+            setTimeout(() => light.remove(), 1000);
+        }
+    }
+    
+    function starfallEffect(count = 100) {
+        for (let i = 0; i < count; i++) {
+            const star = document.createElement('div');
+            star.className = 'star-particle';
+            star.innerHTML = ['⭐','✨','🌟','💫'][Math.floor(Math.random()*4)];
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = '-20px';
+            star.style.animationDuration = 1 + Math.random() * 2.5 + 's';
+            effectLayer.appendChild(star);
+            setTimeout(() => star.remove(), 3000);
+        }
+        if (navigator.vibrate) navigator.vibrate(80);
+    }
+    
+    function comboEffect() { megaExplode(60); lightSparks(30); }
+    function triggerStarfall() { starfallEffect(120); }
+    
+    function showModalWithImage(title, imgSrc, message) {
+        comboEffect();
+        return new Promise((resolve) => {
+            const modal = document.createElement('div');
+            modal.className = 'custom-modal';
+            modal.innerHTML = `<div class="custom-modal-card"><i class="fas fa-heart" style="font-size:2rem;"></i><h3 style="font-family:Dancing Script;">${title}</h3><img src="${imgSrc}" onerror="this.src='https://placehold.co/300x300/ffccdd/ff6699?text=фото'"><p>${message}</p><button class="modal-close-btn">закрыть</button></div>`;
+            document.body.appendChild(modal);
+            modal.querySelector('.modal-close-btn').onclick = () => { modal.remove(); resolve(); };
+            modal.onclick = (e) => { if (e.target === modal) { modal.remove(); resolve(); } };
+        });
+    }
+    
+    function showModal(title, message) {
+        comboEffect();
+        return new Promise((resolve) => {
+            const modal = document.createElement('div');
+            modal.className = 'custom-modal';
+            modal.innerHTML = `<div class="custom-modal-card"><i class="fas fa-heart" style="font-size:2rem;"></i><h3 style="font-family:Dancing Script;">${title}</h3><p>${message}</p><button class="modal-close-btn">закрыть</button></div>`;
+            document.body.appendChild(modal);
+            modal.querySelector('.modal-close-btn').onclick = () => { modal.remove(); resolve(); };
+            modal.onclick = (e) => { if (e.target === modal) { modal.remove(); resolve(); } };
+        });
+    }
+    
+    function showModalWithVideo(title, videoSrc, message) {
+        comboEffect();
+        starfallEffect(50);
+        return new Promise((resolve) => {
+            const modal = document.createElement('div');
+            modal.className = 'custom-modal';
+            modal.innerHTML = `<div class="custom-modal-card"><i class="fas fa-video" style="font-size:2rem;"></i><h3 style="font-family:Dancing Script;">${title}</h3><video src="${videoSrc}" controls autoplay style="width:100%; border-radius:30px; margin:0.5rem 0;" onerror="this.style.display='none'"></video><p>${message}</p><button class="modal-close-btn">закрыть</button></div>`;
+            document.body.appendChild(modal);
+            modal.querySelector('.modal-close-btn').onclick = () => { modal.remove(); resolve(); };
+            modal.onclick = (e) => { if (e.target === modal) { modal.remove(); resolve(); } };
+        });
+    }
+    
+    // ========== ЛОГИН С ПАРОЛЕМ ==========
+    const loginScreen = document.getElementById('loginScreen');
+    const mainSite = document.getElementById('mainSite');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginInput = document.getElementById('loginInput');
+    
+    function checkLogin() {
+        const enteredValue = loginInput.value.trim();
+        if (enteredValue === 'НОКС' || enteredValue === 'нокс' || enteredValue === 'Нокс') {
+            loginScreen.style.display = 'none';
+            mainSite.style.display = 'block';
+            starfallEffect(50);
+            showWelcomeMessage();
+            setTimeout(() => { if (songs[0]) playSong(songs[0].url); }, 1000);
+        } else {
+            alert('❌ Неверный пароль! Нужно ввести: НОКС');
+        }
+    }
+    
+    loginBtn.onclick = checkLogin;
+    loginInput.onkeypress = (e) => { if (e.key === 'Enter') checkLogin(); };
+    
+    const songButtonsDiv = document.getElementById('songButtons');
+    songs.forEach((song) => {
+        const btn = document.createElement('button');
+        btn.innerText = song.name;
+        btn.onclick = () => playSong(song.url);
+        songButtonsDiv.appendChild(btn);
+    });
+    document.getElementById('stopMusicBtn').onclick = stopMusic;
+    
+    let welcomeIndex = 0;
+    async function showWelcomeMessage() {
+        if (welcomeIndex === 0) {
+            await showModalWithImage(welcomeWithImage.title, welcomeWithImage.img, welcomeWithImage.text);
+            welcomeIndex++;
+        }
+        if (welcomeIndex <= welcomeMessages.length) {
+            const msg = welcomeMessages[welcomeIndex - 1];
+            if (msg) {
+                await showModal(msg.title, msg.text);
+                welcomeIndex++;
+                if (welcomeIndex <= welcomeMessages.length) showWelcomeMessage();
+            }
+        }
+    }
+    
+    document.getElementById('guideBtn').onclick = () => showModal('📖 РУКОВОДСТВО', '✨ Факты о тебе\n🎰 Казино\n💖 Игра\n🔮 Пасхалка\n🎵 Музыка');
+    document.getElementById('starfallBtn').onclick = () => triggerStarfall();
+    
+    const slider = document.getElementById('happinessSlider');
+    const happinessVal = document.getElementById('happinessValue');
+    slider.oninput = () => {
+        const val = slider.value;
+        happinessVal.innerText = val + '% счастья';
+        if (val == 100) { comboEffect(); setTimeout(() => showModal('💖 СПАСИБО!', 'Ты сделала мой день! 💜'), 300); }
+        else if (val == 0) { comboEffect(); setTimeout(() => showModal('😔 НУ БЛИН...', 'Постараюсь лучше!'), 300); }
+    };
+    
+    document.querySelectorAll('.fact-btn').forEach(btn => {
+        btn.onclick = async () => {
+            const data = categoryImages[btn.getAttribute('data-fact')];
+            if (data) await showModalWithImage(`💜 ${btn.innerText}`, data.img, data.text);
+        };
+    });
+    
+    let gameActive = false, hearts = 0, gameInterval = null;
+    const gameBtn = document.getElementById('gameBtn');
+    function spawnGameHeart() {
+        if (!gameActive) return;
+        const heart = document.createElement('div');
+        heart.className = 'effect-particle';
+        heart.innerHTML = ['❤️','💖','💜'][Math.floor(Math.random()*3)];
+        heart.style.left = Math.random() * (window.innerWidth - 70) + 'px';
+        heart.style.top = Math.random() * (window.innerHeight - 120) + 'px';
+        heart.style.fontSize = (28 + Math.random() * 20) + 'px';
+        heart.style.animation = 'none';
+        heart.style.cursor = 'pointer';
+        heart.style.pointerEvents = 'auto';
+        heart.onclick = () => {
+            if (!gameActive) return;
+            heart.remove();
+            hearts++;
+            if (hearts >= 10) {
+                gameActive = false;
+                clearInterval(gameInterval);
+                gameBtn.innerText = '💖 игра пройдена! 💖';
+                comboEffect();
+                setTimeout(() => showModalWithImage('🎉 ПОБЕДА! 🎉', gameWinImage, gameWinText), 400);
+            }
+        };
+        effectLayer.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+    gameBtn.onclick = () => {
+        if (gameActive) return;
+        document.querySelectorAll('.effect-particle').forEach(el => el.remove());
+        hearts = 0;
+        gameActive = true;
+        gameBtn.innerText = '❤️ ЛОВИ 10 СЕРДЕЦ ❤️';
+        if (gameInterval) clearInterval(gameInterval);
+        gameInterval = setInterval(() => { if(gameActive) spawnGameHeart(); }, 700);
+        setTimeout(() => { if(gameActive) { gameActive = false; clearInterval(gameInterval); gameBtn.innerText = '💖 попробуй ещё раз'; } }, 20000);
+    };
+    
+    document.getElementById('complimentBtn').onclick = () => showModalWithImage('💬 КОМПЛИМЕНТ', complimentImage, 'Ты самая нежная, Владка 💜');
+    document.getElementById('superpowerBtn').onclick = () => showModalWithImage('🦸‍♀️ СУПЕРСИЛА', superpowerImage, 'Твоя суперсила — делать мир добрее ✨');
+    document.getElementById('horoscopeBtn').onclick = () => showModalWithImage('🔮 ГОРОСКОП', horoscopeImage, 'Звёзды: сегодня тебя ждёт сюрприз 💫');
+    document.getElementById('portalBtn').onclick = () => showModalWithImage('🌀 ПОРТАЛ ЛЮБВИ', portalImage, 'Сердечки разлетелись по вселенной! 💖');
+    document.getElementById('memeBtn').onclick = () => showModalWithImage('🎭 МЕМ ДНЯ', memeImage, memes[Math.floor(Math.random()*memes.length)]);
+    
+    document.getElementById('casinoBtn').onclick = () => {
+        const modalDiv = document.createElement('div');
+        modalDiv.className = 'custom-modal';
+        modalDiv.innerHTML = `<div class="custom-modal-card"><i class="fas fa-gem"></i><h3>🎰 КАЗИНО 🎰</h3><div style="background:#f5e0e8; border-radius:30px; padding:1rem;"><div style="font-size:4rem; background:white; border-radius:30px;" id="slotDisplay">?</div><button id="spinSlot" class="btn-custom" style="margin-top:1rem;">КРУТИТЬ</button></div><div id="slotResult"></div><button class="modal-close-btn" id="closeSlot">закрыть</button></div>`;
+        document.body.appendChild(modalDiv);
+        let win = false;
+        document.getElementById('spinSlot').onclick = () => {
+            if (win) return;
+            const num = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('slotDisplay').innerHTML = num;
+            if (num === 1) {
+                win = true;
+                document.getElementById('slotResult').innerHTML = `<p style="color:#b24b6e;">🎉 ПОБЕДА!<br>Секретное слово: <strong>${secretWord}</strong><br>Напиши в Telegram и задай 3 вопроса</p><a href="https://t.me/${telegramNick}" target="_blank" style="display:inline-block; background:#ff88aa; padding:8px 20px; border-radius:50px; margin-top:10px; color:white;">📱 НАПИСАТЬ</a>`;
+                comboEffect();
+                setTimeout(() => showModalWithImage('🎉 ВЫИГРЫШ! 🎉', casinoWinImage, 'Секретное слово: ' + secretWord), 400);
+            } else {
+                document.getElementById('slotResult').innerHTML = `<p>выпало ${num}, нужно 1. попробуй ещё 🌸</p>`;
+            }
+        };
+        document.getElementById('closeSlot').onclick = () => modalDiv.remove();
+    };
+    
+    let hiddenClicks = 0, hiddenIdx = 0;
+    document.getElementById('hiddenTrigger').onclick = () => {
+        hiddenClicks++;
+        if (hiddenClicks >= 5 && hiddenIdx < hiddenFacts.length) {
+            comboEffect();
+            showModal('🔮 СЕКРЕТНЫЕ ФАКТЫ', hiddenFacts[hiddenIdx]);
+            hiddenIdx++;
+            if (hiddenIdx >= hiddenFacts.length) document.getElementById('hiddenTrigger').style.opacity = '0.1';
+            hiddenClicks = 0;
+        }
+    };
+    
+    document.getElementById('finishBtn').onclick = () => {
+        const modal = document.createElement('div');
+        modal.className = 'custom-modal';
+        modal.innerHTML = `<div class="custom-modal-card" id="finishModalCard"><i class="fas fa-question-circle"></i><h3>🏁 ЗАВЕРШИТЬ?</h3><p>Тебе понравилось?</p><div><button id="finishYes" style="background:#ff88aa; border:none; padding:8px 25px; border-radius:50px; margin:5px;">ДА</button><button id="finishNo" style="background:#ffccdd; border:none; padding:8px 25px; border-radius:50px; margin:5px;">НЕТ</button></div></div>`;
+        document.body.appendChild(modal);
+        const noBtn = document.getElementById('finishNo');
+        const card = document.getElementById('finishModalCard');
+        function teleport() { card.style.position = 'fixed'; card.style.left = Math.random() * (window.innerWidth - 200) + 'px'; card.style.top = Math.random() * (window.innerHeight - 150) + 'px'; card.style.transform = 'none'; }
+        noBtn.onmouseenter = teleport;
+        noBtn.ontouchstart = (e) => { e.preventDefault(); teleport(); };
+        noBtn.onclick = (e) => { e.preventDefault(); teleport(); };
+        document.getElementById('finishYes').onclick = () => {
+            modal.remove();
+            comboEffect();
+            starfallEffect(120);
+            setTimeout(() => {
+                showModalWithVideo('💜 ТВОЙ НОКС 💜', finishVideo, 'Надеюсь, тебе понравилось! 💜\n\nНапиши мне в Telegram или скинь свою улыбку 🌸\n\nТвой покорный фанат — Нокс');
+                setTimeout(() => {
+                    const tgModal = document.createElement('div');
+                    tgModal.className = 'custom-modal';
+                    tgModal.innerHTML = `<div class="custom-modal-card"><i class="fab fa-telegram"></i><h3>📱 НАПИСАТЬ МНЕ</h3><p>Нажми на кнопку, чтобы перейти в Telegram</p><a href="https://t.me/${telegramNick}" target="_blank" class="telegram-link">🚀 НАПИСАТЬ НОКСУ</a><button class="modal-close-btn" id="closeTgModal">закрыть</button></div>`;
+                    document.body.appendChild(tgModal);
+                    tgModal.querySelector('#closeTgModal').onclick = () => tgModal.remove();
+                }, 600);
+            }, 500);
+        };
+    };
+</script>
+</body>
+</html>
