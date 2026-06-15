@@ -1,36 +1,69 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>💜 Владка | Подарок от Нокса 💜</title>
+    <title>💜 Владка | RGB Галактика + Пазл + Капсула времени 💜</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        
         body {
             min-height: 100vh;
             font-family: 'Quicksand', sans-serif;
             overflow-x: hidden;
             color: #5a3e4b;
-            animation: rainbowBg 12s infinite alternate;
+            background: linear-gradient(145deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #ee82ee);
+            background-size: 400% 400%;
+            animation: rgbFlow 12s infinite alternate;
         }
-        @keyframes rainbowBg {
-            0% { background: linear-gradient(145deg, #ffcccc, #ff9999); }
-            17% { background: linear-gradient(145deg, #ffdd99, #ffcc66); }
-            33% { background: linear-gradient(145deg, #ffffcc, #ffff99); }
-            50% { background: linear-gradient(145deg, #ccffcc, #99ff99); }
-            67% { background: linear-gradient(145deg, #99ccff, #6699ff); }
-            83% { background: linear-gradient(145deg, #cc99ff, #9966ff); }
-            100% { background: linear-gradient(145deg, #ff99cc, #ff66aa); }
+        
+        @keyframes rgbFlow {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 50%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 50%; }
+            100% { background-position: 0% 50%; }
         }
+        
+        /* ГАЛАКТИКА ЗВЁЗД */
+        .star-galaxy {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 3s infinite alternate;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        .star:hover {
+            transform: scale(2);
+            box-shadow: 0 0 10px gold;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.3); }
+        }
+        
         .content {
             position: relative;
-            z-index: 5;
+            z-index: 10;
             max-width: 550px;
             margin: 0 auto;
             padding: 1.5rem 1.2rem 3rem;
         }
+        
         .login-screen {
             position: fixed;
             top: 0;
@@ -73,6 +106,7 @@
             cursor: pointer;
         }
         .main-site { display: none; }
+        
         .hero-block {
             background-image: url('background.jpg');
             background-size: cover;
@@ -105,6 +139,7 @@
             color: transparent;
             cursor: pointer;
         }
+        
         .btn-custom {
             background: rgba(255, 230, 240, 0.85);
             backdrop-filter: blur(5px);
@@ -120,6 +155,58 @@
         }
         .btn-custom:active { transform: scale(0.96); animation: btnShake 0.2s ease; }
         @keyframes btnShake { 0%,100%{ transform: translateX(0); } 25%{ transform: translateX(-3px); } 75%{ transform: translateX(3px); } }
+        
+        /* ПАЗЛ */
+        .puzzle-container {
+            background: rgba(0,0,0,0.5);
+            border-radius: 32px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin: 1rem 0;
+        }
+        .puzzle-piece {
+            aspect-ratio: 1;
+            background-size: 300%;
+            cursor: pointer;
+            border-radius: 12px;
+            border: 2px solid white;
+        }
+        .puzzle-piece:active { transform: scale(0.97); }
+        .puzzle-message { margin-top: 0.5rem; font-size: 0.8rem; }
+        
+        /* КАПСУЛА ВРЕМЕНИ */
+        .timecapsule {
+            background: rgba(255, 230, 240, 0.85);
+            border-radius: 48px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .timecapsule textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 24px;
+            border: 1px solid #ff99bb;
+            margin: 0.5rem 0;
+            font-family: inherit;
+        }
+        
+        /* ВЗЛОМ */
+        .hacked {
+            animation: shake 0.3s ease-in-out;
+        }
+        @keyframes shake {
+            0%,100%{ transform: translateX(0); }
+            25%{ transform: translateX(-10px); }
+            75%{ transform: translateX(10px); }
+        }
+        
         .effect-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
         .effect-particle { position: absolute; font-size: 1.6rem; pointer-events: none; animation: particleFly 1.5s ease-out forwards; }
         @keyframes particleFly { 0% { transform: scale(0.3) translate(0, 0); opacity: 1; } 100% { transform: scale(1.3) translate(var(--tx, 0), var(--ty, -100px)); opacity: 0; } }
@@ -127,11 +214,13 @@
         @keyframes lightFade { 0% { transform: scale(0.5); opacity: 0.9; } 100% { transform: scale(1.5); opacity: 0; } }
         .star-particle { position: absolute; font-size: 1.4rem; pointer-events: none; animation: starFallAnim 2s linear forwards; }
         @keyframes starFallAnim { 0% { transform: translateY(-50px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        
         .custom-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 2000; }
         .custom-modal-card { background: #fff0f5; border-radius: 48px; padding: 1.8rem; text-align: center; max-width: 340px; width: 85%; border: 2px solid #ffb7ca; animation: popRotate 0.4s ease; }
         @keyframes popRotate { from { transform: scale(0.3) rotate(-180deg); opacity: 0; } to { transform: scale(1) rotate(0deg); opacity: 1; } }
         .custom-modal-card img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 0.5rem auto; border: 3px solid #ff88aa; }
         .modal-close-btn { background: #ffb7cc; border: none; padding: 8px 20px; border-radius: 50px; margin-top: 0.8rem; cursor: pointer; }
+        
         .gallery-slider { display: flex; overflow-x: auto; gap: 1rem; padding: 0.5rem; scroll-snap-type: x mandatory; }
         .gallery-slider img { width: 85%; flex: 0 0 85%; scroll-snap-align: center; border-radius: 32px; aspect-ratio: 3/4; object-fit: cover; border: 3px solid white; }
         .slider-container { background: rgba(255,230,240,0.8); border-radius: 60px; padding: 1rem; margin: 1rem 0; text-align: center; }
@@ -151,6 +240,8 @@
 </head>
 <body>
 
+<div class="star-galaxy" id="starGalaxy"></div>
+
 <div class="login-screen" id="loginScreen">
     <div class="login-card">
         <i class="fas fa-lock" style="font-size: 3rem; color:#ff88aa;"></i>
@@ -167,6 +258,21 @@
             <h1 id="magicName">Владка</h1>
             <p><i class="fas fa-star-of-life"></i> подарок от Нокса <i class="fas fa-star-of-life"></i></p>
         </div>
+
+        <div class="puzzle-container">
+            <i class="fas fa-puzzle-piece"></i> <strong>собери пазл из твоего фото</strong>
+            <div class="puzzle-grid" id="puzzleGrid"></div>
+            <div id="puzzleMessage" class="puzzle-message"></div>
+        </div>
+
+        <div class="timecapsule">
+            <i class="fas fa-clock"></i> <strong>капсула времени</strong><br>
+            <textarea id="timeMessage" rows="3" placeholder="Напиши что-то, что я должен узнать через год..."></textarea>
+            <button id="saveTimeCapsule" class="btn-custom" style="margin-top:0;">💾 сохранить в капсулу</button>
+            <div id="savedMessage" style="margin-top:0.5rem; font-size:0.8rem;"></div>
+        </div>
+
+        <button class="btn-custom" id="hackBtn">💀 ВЗЛОМАТЬ САЙТ</button>
 
         <div class="music-player">
             <i class="fas fa-music"></i> <strong>🎵 выбери мелодию</strong> <i class="fas fa-headphones"></i>
@@ -253,7 +359,7 @@
     const welcomeWithImage = {
         img: 'welcome.jpg',
         title: '💜 ПРИВЕТ, ВЛАДКА 💜',
-        text: 'решила еще раз посмотреть? отлично , твой покорный фанат — Нокс 💜'
+        text: 'Владка, этот сайт я сделал для тебя. Кайфуй, изучай, твой покорный фанат — Нокс 💜'
     };
     
     const welcomeMessages = [
@@ -269,6 +375,131 @@
     
     const effectLayer = document.getElementById('effectLayer');
     let currentAudio = null;
+    
+    // ========== ГАЛАКТИКА ЗВЁЗД ==========
+    function createStars() {
+        const galaxy = document.getElementById('starGalaxy');
+        for (let i = 0; i < 300; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 4 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            star.style.animationDuration = Math.random() * 3 + 2 + 's';
+            star.onclick = (e) => {
+                e.stopPropagation();
+                star.style.transform = 'scale(3)';
+                star.style.opacity = '0';
+                setTimeout(() => star.remove(), 200);
+                for (let j = 0; j < 5; j++) {
+                    const spark = document.createElement('div');
+                    spark.innerHTML = '✨';
+                    spark.style.position = 'fixed';
+                    spark.style.left = (e.clientX - 20 + Math.random() * 40) + 'px';
+                    spark.style.top = (e.clientY - 20 + Math.random() * 40) + 'px';
+                    spark.style.fontSize = '1rem';
+                    spark.style.pointerEvents = 'none';
+                    spark.style.zIndex = '9999';
+                    document.body.appendChild(spark);
+                    setTimeout(() => spark.remove(), 500);
+                }
+            };
+            galaxy.appendChild(star);
+        }
+    }
+    createStars();
+    
+    // ========== ПАЗЛ ==========
+    let puzzleSolved = false;
+    function initPuzzle() {
+        const puzzleUrl = 'puzzle.jpg';
+        const pieces = [];
+        for (let i = 0; i < 9; i++) {
+            pieces.push({ correct: i, current: i });
+        }
+        for (let i = pieces.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [pieces[i].current, pieces[j].current] = [pieces[j].current, pieces[i].current];
+        }
+        const grid = document.getElementById('puzzleGrid');
+        grid.innerHTML = '';
+        pieces.forEach((piece, idx) => {
+            const div = document.createElement('div');
+            div.className = 'puzzle-piece';
+            const originalIdx = piece.current;
+            const origRow = Math.floor(originalIdx / 3);
+            const origCol = originalIdx % 3;
+            div.style.backgroundImage = `url('${puzzleUrl}')`;
+            div.style.backgroundPosition = `${origCol * 33.33}% ${origRow * 33.33}%`;
+            div.style.backgroundSize = '300%';
+            div.onclick = () => {
+                if (puzzleSolved) return;
+                let solved = true;
+                for (let i = 0; i < pieces.length; i++) {
+                    if (pieces[i].current !== pieces[i].correct) solved = false;
+                }
+                if (solved && !puzzleSolved) {
+                    puzzleSolved = true;
+                    document.getElementById('puzzleMessage').innerHTML = '🎉 Ты собрала пазл! Ты — космос, Владка 🎉';
+                } else {
+                    const randomIdx = Math.floor(Math.random() * pieces.length);
+                    const temp = pieces[idx].current;
+                    pieces[idx].current = pieces[randomIdx].current;
+                    pieces[randomIdx].current = temp;
+                    initPuzzle();
+                }
+            };
+            grid.appendChild(div);
+        });
+    }
+    initPuzzle();
+    
+    // ========== КАПСУЛА ВРЕМЕНИ ==========
+    function loadTimeCapsule() {
+        const saved = localStorage.getItem('timeCapsule_vladka');
+        if (saved) {
+            document.getElementById('savedMessage').innerHTML = '💌 Сохранено: "' + saved.substring(0, 50) + '..."';
+        }
+    }
+    document.getElementById('saveTimeCapsule').onclick = () => {
+        const msg = document.getElementById('timeMessage').value.trim();
+        if (msg) {
+            localStorage.setItem('timeCapsule_vladka', msg);
+            document.getElementById('savedMessage').innerHTML = '💾 Капсула времени сохранена! Через год я это увижу 💜';
+            document.getElementById('timeMessage').value = '';
+        } else {
+            alert('Напиши что-нибудь, Владка 💜');
+        }
+    };
+    loadTimeCapsule();
+    
+    // ========== ВЗЛОМАТЬ САЙТ ==========
+    document.getElementById('hackBtn').onclick = () => {
+        document.body.classList.add('hacked');
+        const matrixDiv = document.createElement('div');
+        matrixDiv.style.position = 'fixed';
+        matrixDiv.style.top = '0';
+        matrixDiv.style.left = '0';
+        matrixDiv.style.width = '100%';
+        matrixDiv.style.height = '100%';
+        matrixDiv.style.background = 'rgba(0,255,0,0.2)';
+        matrixDiv.style.zIndex = '9998';
+        matrixDiv.style.pointerEvents = 'none';
+        matrixDiv.style.fontFamily = 'monospace';
+        matrixDiv.style.color = '#0f0';
+        matrixDiv.style.fontSize = '1rem';
+        matrixDiv.style.whiteSpace = 'pre';
+        matrixDiv.innerHTML = '01001110 01001111 01001011 01010011<br>ВЗЛОМ...<br>СКАЧИВАНИЕ ДАННЫХ...<br>ШУТКА 😜';
+        document.body.appendChild(matrixDiv);
+        setTimeout(() => {
+            document.body.classList.remove('hacked');
+            matrixDiv.remove();
+            alert('💜 Сайт восстановлен! Ничего не сломалось, просто прикол 💜');
+        }, 2000);
+    };
     
     function playSong(url) {
         if (currentAudio) { currentAudio.pause(); currentAudio = null; }
@@ -412,7 +643,7 @@
         }
     }
     
-    document.getElementById('guideBtn').onclick = () => showModal('📖 РУКОВОДСТВО', '✨ Факты о тебе\n🎰 Казино\n💖 Игра\n🔮 Пасхалка\n🎵 Музыка');
+    document.getElementById('guideBtn').onclick = () => showModal('📖 РУКОВОДСТВО', '✨ Факты о тебе\n🎰 Казино\n💖 Игра\n🔮 Пасхалка\n🎵 Музыка\n🧩 Пазл, капсула времени, RGB фон!');
     document.getElementById('starfallBtn').onclick = () => triggerStarfall();
     
     const slider = document.getElementById('happinessSlider');
